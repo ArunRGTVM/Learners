@@ -1,0 +1,77 @@
+{% extends 'conditions/base.html' %}
+{% block content %}
+<h1 class="headfont"><center>Enquire/Update</center></h1> <br>
+<form method="POST">{% csrf_token %}
+    <div class="rightsection">
+        <div class="eqcontainer">
+                <div class="paracont">
+                <p> Select the field name &nbsp
+                <select name="fieldDrp" class="styled-select blue semi-square">
+                    {% for field in fields %}
+                        {% if field == pfield %}
+                            <option selected="selected"> {{field}} </option>
+                        {% else %}
+                            <option> {{field}} </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                </p>
+                <p> Select the operation &nbsp &nbsp
+                <select name="operDrp" class="styled-select blue semi-square">
+                    {% for oper in opers %}
+                        {% if oper == poper %}
+                            <option selected="selected"> {{oper}} </option>
+                        {% else %}
+                            <option> {{oper}} </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                </p>
+                <p> Select the value &nbsp &nbsp &nbsp &nbsp &nbsp
+                <select name="valDrp" class="styled-select blue semi-square">
+                    {% for value in values %}
+                        {% if value == pvalue %}
+                            <option selected="selected"> {{value}} </option>
+                        {% else %}
+                            <option> {{value}} </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                </p>
+                <br>
+                <input type="submit" name="filBtn" value="Show rules with above condition" class="button">
+                <br><br>
+                <input type="submit" name="filBtn" value="Show all rules" class="button">
+                </div>
+        </div>
+    </div>
+
+    <div class="leftsection">
+        <div class="textcont">
+            <table style="width:100%">
+                <tr>
+                    <th bgcolor="#3b8ec2" rowspan="2"><center>Rule</center></th>
+                    <th bgcolor="#3b8ec2" colspan="4"><center>Interest rate</center></th>
+                </tr>
+                <tr>
+                    <th bgcolor="#3b8ec2">1st 30 days</th>
+                    <th bgcolor="#3b8ec2">Days >= 30 </th>
+                    <th bgcolor="#3b8ec2">Days >= 60 </th>
+                    <th bgcolor="#3b8ec2">Days >= 90 </th>
+                </tr>
+                {% for rule, ints in ruleList.items %}
+                <tr>
+                    <td>
+                        <input type="submit" name="editBtn" value="{{rule}}" class="ebutton">
+                    </td>
+                    <td><center>0</center></td>
+                    {% for int in ints %}
+                    <td><center>{{int}}</center></td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</form>
+{% endblock %}

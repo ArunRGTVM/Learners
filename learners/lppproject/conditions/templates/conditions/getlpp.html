@@ -1,0 +1,41 @@
+{% extends 'conditions/base.html' %}
+{% block content %}
+<h1 class="headfont"><center>Get LPP</center></h1> <br>
+
+<form method="POST">{% csrf_token %}
+    <div class="rightsection">
+        <div class="gcontainer">
+            <p class="lowpara">
+                <input type="text" name ="rcvdDte" placeholder="YYYY/MM/DD" class="updtselect" value="{{prcvdte}}"> : <-- Recieved date
+            </p>
+            <p class="lowpara">
+                <input type="text" name ="fnlDte" placeholder="YYYY/MM/DD" class="updtselect" value="{{pfnldte}}"> : <-- Finalized date
+            </p>
+            {% for field,value in fvalue.items %}
+                <p class="lowpara">
+                    {% if field == 'days' %}
+                    <input type="text" name ="{{field}}" placeholder="{{field}}" class="updtselect" value="{{value}}" readonly>
+                    : <-- days difference
+                    {% else %}
+                    <input type="text" name ="{{field}}" placeholder="{{field}}" class="updtselect" value="{{value}}">
+                    : <-- {{field}}
+                    {% endif %}
+                </p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="rightsection">
+        <div class="upcontainer">
+            <br>
+            <p class="lowpara">Enter all relevant claim data above and then click the below button</p>
+            <br>
+            <p class="lowpara">
+                <input type="submit" name="getLpp" value="Get LPP" class="shwbutton">
+            </p>
+            <br>
+            <p class="lowpara">{{intText}}</p>
+        </div>
+    </div>
+</form>
+{% endblock %}

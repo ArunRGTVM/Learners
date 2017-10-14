@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LPP Rule Based System</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="{% static 'css/conditions.css' %}">
+</head>
+<body id="bg" style="background-image: url('{% static "images/home.jpg"%}')";>
+    <div class="w3-container w3-blue">
+        <h1 style="float:left"><center>Enterprise Late Payment Penalty Engine</center></h1>
+    </div>
+
+    <div class="logincont">
+        <h2><b>Login</b></h2>
+        <br>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <br>
+            <button type="submit" class="button">Login</button>
+        </form>
+    </div>
+
+</body>
+</html>

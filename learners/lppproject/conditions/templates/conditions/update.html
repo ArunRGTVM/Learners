@@ -1,0 +1,74 @@
+{% extends 'conditions/base.html' %}
+{% block content %}
+<h1 class="headfont"><center>Insert Rules</center></h1> <br>
+<form method="POST">{% csrf_token %}
+<div class="leftsection">
+    <div class="updtcond">
+        <table style="width:100%">
+            <tr>
+                <th bgcolor="#3b8ec2">Condition Name</th>
+                <th bgcolor="#3b8ec2">Condition</th>
+            </tr>
+            {% for cond in listCond %}
+            <tr>
+                <td>{{cond.name}}</td>
+                <td>{{cond.field}} {{cond.oper}} {{cond.valuetext}}</td>
+                <td><input type="radio" name="delTBtn" value="{{cond.name}}"><input type="hidden" name="tstvl" value="{{psbtn}}"></td>
+            </tr>
+
+            {% endfor %}
+        </table>
+    </div>
+    <div class="lowleft">
+        <div class="lowpara">
+            <select name="fieldDrp" class="lowleft-select blue semi-square">
+                {% for field in fields %}
+                    {% if field == pfield %}
+                        <option selected> {{field}} </option>
+                    {% else %}
+                        <option> {{field}} </option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <input type="submit" name="shwBtns" value="Show related conditions" class="shwbutton">
+            <input type="submit" name="shwBtns" value="Show all conditions" class="shwbutton">
+            <br>
+            <input type="text" name ="newField" placeholder="Enter field" class="updtselect">
+            <select name="operDrp" class="lowleft-select blue semi-square">
+                {% for ky,vl in opvls.items %}
+                    {% if ky == popvl %}
+                        <option value="{{ky}}" selected> {{vl}} </option>
+                    {% else %}
+                        <option value="{{ky}}"> {{vl}} </option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <input type="text" name="newvalue" placeholder="Enter Value" class="updtselect">
+            <br>
+            <input type="submit" name="shwBtn" value="Insert above condition" class="shwbutton">
+                {{message}}
+            <br>
+            <input type="submit" name="delCBtn" value="Delete selected condition" class="shwbutton">
+            </div>
+    </div>
+</div>
+
+<div class="rightsection">
+    <div class="eqcontainer">
+        <div class="lowpara">
+            <textarea name="ruleArea" rows="4" cols="52">{{ruleText}}</textarea>
+            <br><br>
+            <input type="submit" name="filBtn" value="Validate" class="shwbutton">
+            <br>
+            Interest rate if elapsed days >= 30 &nbsp <input type="text" name ="intge30" placeholder="Interest %" class="updtselect">
+            Interest rate if elapsed days >= 60 &nbsp <input type="text" name ="intge60" placeholder="Interest %" class="updtselect">
+            Interest rate if elapsed days >= 90 &nbsp <input type="text" name ="intge90" placeholder="Interest %" class="updtselect">
+            <br>
+            <input type="submit" name="filBtn" value="Insert rule" class="shwbutton">
+            <br><br>
+            <p>{{valMsg}}</p>
+            </div>
+    </div>
+</div>
+</form>
+{% endblock %}
